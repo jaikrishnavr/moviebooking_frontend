@@ -1,3 +1,34 @@
+# Axios
+
+* npm i axios
+
+# Bootstrap
+
+* npm install react-bootstrap bootstrap
+
+# Material ui
+
+* npm install @mui/material @emotion/react @emotion/styled
+
+* npm install @mui/material @mui/styled-engine-sc styled-components
+
+* npm install @mui/icons-material
+
+# REACT ROUTER DOM
+
+* npm i react-router-dom
+
+# FORMIK 
+
+* npm install formik --save 
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
