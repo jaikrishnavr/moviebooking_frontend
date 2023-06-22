@@ -22,6 +22,11 @@
 
 * npm install formik --save 
 
+# Git add .  error
+
+* git config --global core.autocrlf input
+
+
 
 
 
