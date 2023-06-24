@@ -13,7 +13,7 @@ function MovieCard({ movie }) {
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>
-        Adipurush (Hindi: Ādipuruṣa transl. First man)[a] is a 2023 Indian epic mythological action film based on the epic Ramayana.[7] The film is written and directed by Om Raut and produced by T-Series and Retrophiles. Shot simultaneously in Hindi and Telugu, the film stars Prabhas, Saif Ali Khan, Kriti Sanon, Sunny Singh and Devdatta Nage.
+        Adipurush (Hindi: Ādipuruṣa transl.  First man)[a] is a 2023 Indian epic mythological action film based on the epic Ramayana.[7] The film is written and directed by Om Raut and produced by T-Series and Retrophiles. Shot simultaneously in Hindi and Telugu, the film stars Prabhas, Saif Ali Khan, Kriti Sanon, Sunny Singh and Devdatta Nage.
         </Card.Text>
       </Card.Body>
 
