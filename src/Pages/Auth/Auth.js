@@ -1,8 +1,6 @@
-
 import { Formik, Form , Field, ErrorMessage } from "formik";
 import { useAuth } from "../../hooks/auth.hooks";
 import { fromValidator } from "../../validators/auth.form.validator";
-
 
 const Auth = () => {
 

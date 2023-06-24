@@ -4,7 +4,8 @@
 
 # Bootstrap
 
-* npm install react-bootstrap bootstrap
+* npm install react-bootstrap bootstrap    
+
 
 # Material ui
 
@@ -25,6 +26,12 @@
 # Git add .  error
 
 * git config --global core.autocrlf input
+
+# coreui for carasol
+
+* npm install @coreui/react
+* npm install @coreui/coreui
+
 
 
 

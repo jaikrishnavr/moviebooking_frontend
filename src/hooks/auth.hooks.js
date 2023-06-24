@@ -25,7 +25,7 @@ export const useAuth = () => {
             navigate("/client");
           }
           else {
-            navigate("/customer");
+            navigate("/");
           }
         }
     
@@ -38,11 +38,12 @@ export const useAuth = () => {
         redirect();
       })
 
-  const onLogin = async (values, { setSubmitting }) => {
+  const onLogin = async (values, props) => {
+    console.log(props);
       const userDetails = { userId: values.userId, password: values.password };
       const loginResponse = await signIn(userDetails);
       console.log(loginResponse)
-      setSubmitting(false);
+      props.setSubmitting(false);
       redirect();
     }
 
