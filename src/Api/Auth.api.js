@@ -18,6 +18,7 @@ if(accessToken){
     localStorage.setItem("userId",userId);
     localStorage.setItem("email",email);
     localStorage.setItem("userTypes",userTypes);
+    localStorage.setItem("status",status);
     localStorage.setItem("token", accessToken);
  }
 return response.data

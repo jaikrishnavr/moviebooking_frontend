@@ -4,7 +4,7 @@ import Carousal from '../../Components/Carousal/Carousal'
 import { useState } from 'react'
 import { getAllMovies } from '../../Api/Movie.api';
 import { CSpinner } from '@coreui/react';
-import MovieCard from '../../Components/MovieCard/MovieCard';
+import MovieList from '../../Components/MovieList/MovieList';
 
 
 function LandingPage() {
@@ -29,10 +29,6 @@ function LandingPage() {
   },[])
 
 
-  const getMoviesData =() => {
-    return moviesData.map((movie) => <MovieCard MovieDetail={movie}/>)
-  } 
-  
 
 
   return (
@@ -41,10 +37,8 @@ function LandingPage() {
         <Carousal/>
 
         <div className='text-center'>
-
-          <h2> Recomended Movies</h2>
           {
-            (moviesData===null ?   <CSpinner color="danger" variant="grow"/> : getMoviesData() )
+            (moviesData===null ?   <CSpinner color="danger" variant="grow"/> : <MovieList moviesData={moviesData}/> )
           }
 
         </div>
