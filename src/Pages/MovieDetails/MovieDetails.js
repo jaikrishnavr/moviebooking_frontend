@@ -39,11 +39,11 @@ function MovieDetails() {
 
 <div className='row my-4' style={{padding:'40px'}}> 
 
-        <div className='col-lg-5 col-md-6 col-xl-5  ' >
+        <div className='col-xl-4 col-lg-5 col-md-6  ' >
             <img src={movieDetails.posterUrl} width={300} height={500}/>
         </div>
        
-        <div className='col-lg-6 col-md-5 col-xl-6  '>
+        <div className='col-xl-6 col-lg-7 col-md-6  '>
     <h2 className='bolder'>About the movie</h2>
     <div>
        
