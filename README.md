@@ -6,6 +6,10 @@
 
 * npm install react-bootstrap bootstrap    
 
+insert this in index.js
+
+* import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 # Material ui
 
@@ -32,7 +36,20 @@
 * npm install @coreui/react
 * npm install @coreui/coreui
 
+insert this in index.js
 
+* import '@coreui/coreui/dist/css/coreui.min.css'
+
+# react player
+
+* npm i react-player
+
+# bootstrap icons 
+
+* npm i bootstrap-icons
+
+insert this in index.js
+ * import "bootstrap-icons/font/bootstrap-icons.css";
 
 
 

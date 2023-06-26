@@ -1,39 +1,58 @@
 import React from 'react'
 import { ListGroup } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 function MovieCard({ movie }) {
 
-  const { name, description, posterUrl, language, casts, director, _id } = movie;
+  const { name, posterUrl, language, casts , director, _id,description } = movie;
   return (
-   
- <Card className='mx-3 my-3 text-white' style={{ width: '20rem' , borderRadius:'30px'  , border:"1px solid black" , backgroundColor:"black"}}>
-     
-      <Card.Img variant="top" src={posterUrl} style={{height:"25rem"}} />
-      <Card.Body>
-        <Card.Title>{name}</Card.Title>
-        <Card.Text>
-        Adipurush (Hindi: Ādipuruṣa transl.  First man)[a] is a 2023 Indian epic mythological action film based on the epic Ramayana.[7] The film is written and directed by Om Raut and produced by T-Series and Retrophiles. Shot simultaneously in Hindi and Telugu, the film stars Prabhas, Saif Ali Khan, Kriti Sanon, Sunny Singh and Devdatta Nage.
-        </Card.Text>
-      </Card.Body>
-
-      <ListGroup className='text-dark' >
-        <ListGroup.Item>language</ListGroup.Item>
-        <ListGroup.Item>Description</ListGroup.Item>
-        <ListGroup.Item>Cast</ListGroup.Item>
-      </ListGroup>
-     
-     
-      <Card.Body>
-      <Card.Link className='text-danger' href="#">Likes 500k</Card.Link>
-        <Card.Link  className='text-white' href="#">Another Link</Card.Link>
-
-      </Card.Body>
-
-    </Card>
+   <>
+   <Link key={_id} to ={`/movie/${_id}/details`} style={{ textDecoration: 'none' }}> 
+   <Card className='mx-3 my-3 text-white' style={{ width: '20rem' , borderRadius:'30px'  , border:"1px solid black" , backgroundColor:"black"}}>
+   <Card.Header></Card.Header> 
+        <Card.Img variant="top" src={posterUrl} style={{height:"25rem"}} />
        
+           <Card.Body>
+          <Card.Title>{name}</Card.Title>
+          <Card.Text>
+          {description}
+          </Card.Text>
+        </Card.Body>
+  
+        <ListGroup className='list-group-flush text-dark' >
+        <ListGroup.Item className='d-flex justify-content-between'>
+          <span className='text-justify ' style={{fontWeight:"600"}}>Language: </span>
+          <span> {language} </span>
+         </ListGroup.Item>
+         <ListGroup.Item className='d-flex justify-content-between'>
+          <span className='text-justify ' style={{fontWeight:"600"}}>Director: </span>
+          <span> {director} </span>
+         </ListGroup.Item>
+         <ListGroup.Item className='d-flex justify-content-between'>
+          <span style={{fontWeight:"600"}} className='text-justify '>Cast: </span>
+          <span > {casts.join(' , ')} </span>
+         </ListGroup.Item>
+        
+        </ListGroup>
+  
+        <Card.Body>
+  
+          <div style={{fontSize:"1.5rem"}} className='d-flex align-items-center justify-content-between'>
+          <i className="bi bi-hand-thumbs-up-fill text-success "> 6 k </i> 
+          <Card.Link  className='text-info' href="" style={{ textDecoration: 'none' }}>See Trailer <i class="bi bi-arrow-right-circle-fill text-danger"></i></Card.Link>
+          </div>
+
+        </Card.Body>
+      </Card>
+      </Link>
+         
+
+   </>
 
   )
 }
 
 export default MovieCard
+
+

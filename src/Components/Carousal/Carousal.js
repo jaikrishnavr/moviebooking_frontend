@@ -1,5 +1,7 @@
 import { CCarousel, CCarouselItem, CImage } from '@coreui/react'
 import React from 'react'
+import './carousal.css'
+
 
 import one from '../../assets/1.avif'
 import two from '../../assets/2.avif'
@@ -9,8 +11,9 @@ import four from '../../assets/4.avif'
 
 function Carousal() {
   return (
-    <CCarousel controls indicators>
-    <CCarouselItem>
+    <div >
+    <CCarousel controls>
+    <CCarouselItem >
       <CImage className="d-block w-100" src={one} alt="slide 1" />
     </CCarouselItem>
     <CCarouselItem>
@@ -19,10 +22,11 @@ function Carousal() {
     <CCarouselItem>
       <CImage className="d-block w-100" src={three} alt="slide 3" />
     </CCarouselItem>
-    <CCarouselItem>
+    <CCarouselItem> 
       <CImage className="d-block w-100" src={four} alt="slide 3" />
     </CCarouselItem>
   </CCarousel>
+    </div>
   )
 }
 

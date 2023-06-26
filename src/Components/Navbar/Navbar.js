@@ -30,7 +30,7 @@ const onAuthButtonClick = () => {
 
     return (
         <div className=" sticky-top" style={{backgroundColor:"black"}}>
-            <div className="px-2 py-1 d-flex align-items-center justify-content-between">
+            <div className="px-2 py-1 d-flex align-items-center justify-content-around">
                 <div className="px-1">
                     <div className="display-6 text-light py-1">MBA</div>
                 </div>
@@ -53,10 +53,12 @@ const onAuthButtonClick = () => {
                 </div>
             </div>
 
-            <Offcanvas show={showOffcanvas} onHide={handleOffcanvasToggle}>
-                <Offcanvas.Header closeButton>
+            <Offcanvas show={showOffcanvas}  onHide={handleOffcanvasToggle} className="text-white" style={{backgroundColor:"transparent" , backdropFilter: "blur(15px)"}} >
+                <div >
+                <Offcanvas.Header closeButton style={{backgroundColor: "rgba(245, 245, 231, 0.4)" }}>
                     <Offcanvas.Title>Menu</Offcanvas.Title>
                 </Offcanvas.Header>
+                </div>
                 <Offcanvas.Body>
                     <div className="d-flex flex-column">
                         <Form.Control
@@ -65,7 +67,10 @@ const onAuthButtonClick = () => {
                             placeholder="Search Movie"
                             className="mb-3"
                         />
+                        <div className="text-center">
+
                         <Button className="btn btn-danger px-5 py-2 mb-3" style={{backgroundColor:"#ED2B2A"}} onClick={onAuthButtonClick}>{(isLoggedIn)?"Logout": "Login"}</Button>
+                        </div>
                     </div>
                 </Offcanvas.Body>
             </Offcanvas>

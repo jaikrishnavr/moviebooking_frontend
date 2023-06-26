@@ -1,0 +1,9 @@
+.carousel-responsive .carousel-item {
+    max-height: 400px; /* Adjust the maximum height as per your requirement */
+  }
+  
+  @media (max-width: 576px) {
+    .carousel-responsive .carousel-item {
+      max-height: 200px; /* Adjust the maximum height for smaller screens */
+    }
+  }
