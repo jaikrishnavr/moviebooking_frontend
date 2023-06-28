@@ -5,7 +5,7 @@ function MovieList(props) {
     const renderMovies = (movies)=>{
         return  moviesData.map((movie)=>{
             return <MovieCard movie={movie} />
-           }) ;
+           });
     }
 
     const { moviesData } = props;
@@ -16,8 +16,9 @@ function MovieList(props) {
     <div style={{flexWrap:"wrap" }} className= "bg-light d-flex justify-content-center  ">
        
         {renderMovies()}
-        </div>;
+        </div>
         </div> 
 }
+
 
 export default MovieList;
