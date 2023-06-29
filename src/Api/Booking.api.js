@@ -1,17 +1,20 @@
-import axios from "axios"
-import { TOKEN } from "../Utils/Constants";
+import axios from 'axios'
+import { TOKEN } from '../Utils/Constants';
 
 const BASE_URL = process.env.REACT_APP_MBA_BACKEND_URL;
 
-export const getAllBookings = async () => { 
+
+export const getAllBookings = async ()=>{
 
     try{
-        const res= await axios.get(`${BASE_URL}/mba/api/v1/bookings`,{headers:{
-            'x-access-token':localStorage.getItem(TOKEN)
-        }})
-        return res;
-       }
-       catch(err){
-        console.log(err);
-       }
-    }
+    const res= await axios.get(`${BASE_URL}/mba/api/v1/bookings`,{headers:{
+        'x-access-token':localStorage.getItem(TOKEN)
+    }})
+
+    return res;
+
+   }
+   catch(err){
+    console.log(err);
+   }
+}
