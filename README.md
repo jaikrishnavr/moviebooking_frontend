@@ -52,7 +52,12 @@ insert this in index.js
  * import "bootstrap-icons/font/bootstrap-icons.css";
 
 
+# material-table
+* npm install material-table --save
+* npm install @material-ui/core --save
+* npm install @mui/styles @mui/lab
 
+* npm install @material-ui/icons --save
 
 
 

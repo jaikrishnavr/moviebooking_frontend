@@ -6,6 +6,11 @@ import { getAllMovies } from "../../Api/Movie.api";
 import { getAllUsers } from "../../Api/Users.api";
 import CardList from "../../Components/CardList/CardList";
 import { keys } from "../../Utils/Constants";
+import TheatresTable from "../../Components/Tables/TheatresTable/TheatresTable";
+import { ThemeProvider, createMuiTheme, createTheme } from "@mui/material";
+import MoviesTable from "../../Components/Tables/MoviesTable/MoviesTable";
+import BookingsTable from "../../Components/Tables/BookingsTable/BookingsTable";
+import UsersTable from "../../Components/Tables/UsersTable/UsersTable";
 
 
 export const WidgetContext = React.createContext();
@@ -112,6 +117,9 @@ function Admin() {
   }
 
 
+  const theme =  createTheme({
+    direction: 'rtl',
+  });
   return (
     <>
       <Navbar />
@@ -129,11 +137,21 @@ function Admin() {
 
         <CardList counterInfo={counterInfo} />
 </WidgetContext.Provider>
-
-        { showTheatresTable && <div>table1</div>}
-        { showMoviesTable && <div>table2</div>} 
-        { showBookingsTable && <div>table3</div>}
-        { showUsersTable && <div>table4</div>}
+<ThemeProvider theme={theme}>
+        { showTheatresTable &&   <div style={{ maxWidth: "100%" }}> 
+        <TheatresTable theatresList={theatresList}/> 
+        </div> 
+        }
+        { showMoviesTable && <div style={{ maxWidth: "100%" }}> 
+        <MoviesTable moviesList={moviesList}/> 
+        </div>  } 
+        { showBookingsTable && <div style={{ maxWidth: "100%" }}> 
+        <BookingsTable bookingsList={bookingsList}/> 
+        </div>  } 
+        { showUsersTable && <div style={{ maxWidth: "100%" }}> 
+        <UsersTable usersList={usersList}/> 
+        </div>  } 
+</ThemeProvider>
       </div>
     </>
   );
