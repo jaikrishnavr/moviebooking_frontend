@@ -66,11 +66,16 @@ function MoviesTable({ moviesList }) {
       title="Movie List"
       icons={tableIcons}
       options={{
+        headerStyle: {
+          backgroundColor: 'black',
+          color: '#FFF'
+        }, 
         exportButton: true,
-        sorting: true,
+        sorting: false,
         filtering: true,
         rowStyle: {
           cursor: "pointer",
+          backgroundColor: '#EEE',
         },
 
         paginationType: isMobile ? "stepped" : "normal",

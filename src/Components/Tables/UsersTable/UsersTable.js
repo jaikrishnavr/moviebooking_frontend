@@ -51,18 +51,23 @@ function UsersTable({ usersList }) {
           { title: "User Id", field: "userId" },
           { title: "User Name", field: "name" },
           { title: "Email", field: "email" },
-          { title: "User Type", field: "userTypes" },
+          { title: "UserType", field: "userType" },
           { title: "Status", field: "userStatus" },
         ]}
         data={usersList}
         title="User List"
         icons={tableIcons}
         options={{
+          headerStyle: {
+            backgroundColor: 'black',
+            color: '#FFF'
+          }, 
           exportButton: true,
-          sorting: true,
+          sorting: false,
           filtering: true,
           rowStyle: {
             cursor: "pointer",
+            backgroundColor: '#EEE',
           },
           paginationType: isMobile ? "stepped" : "normal",
           pageSizeOptions: [5, 10, 15],

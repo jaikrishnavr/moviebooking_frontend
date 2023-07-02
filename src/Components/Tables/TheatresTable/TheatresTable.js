@@ -66,11 +66,17 @@ function TheatresTable({theatresList}) {
   title= "Theaters List"
   icons={tableIcons}
   options={{
+    headerStyle: {
+      backgroundColor: 'black',
+      color: '#FFF'
+    },    
+
     exportButton: true,
-  sorting: true,
-  filtering : true,
+  sorting: false,
+ 
   rowStyle: {
     cursor: "pointer",
+    backgroundColor: '#EEE',
   },
   paginationType: isMobile ? "stepped" : "normal",
           pageSizeOptions: [5, 10, 15],
