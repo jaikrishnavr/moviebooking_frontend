@@ -3,6 +3,7 @@ import { useState } from "react";
 import { isUserLoggedIn } from "../../Utils/Helper";
 import { useNavigate } from "react-router-dom";
 
+import '../../Components/Tables/TableCommon.css'
 
 
 const Navbar = () => {
@@ -29,7 +30,7 @@ const onAuthButtonClick = () => {
     };
 
     return (
-        <div className=" sticky-top" style={{backgroundColor:"black"}}>
+        <div className=" sticky-top bodybg" style={{backgroundColor:"black"}}>
             <div className="px-2 py-1 d-flex align-items-center justify-content-around">
                 <div className="px-1">
                     <div className="display-6 text-light py-1">MBA</div>

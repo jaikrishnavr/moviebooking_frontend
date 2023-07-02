@@ -2,6 +2,10 @@ import MaterialTable from 'material-table'
 import React, { forwardRef } from 'react'
 
 
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
+
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import Check from "@material-ui/icons/Check";
@@ -21,6 +25,11 @@ import ViewColumn from "@material-ui/icons/ViewColumn";
 
 
 function TheatresTable({theatresList}) {
+
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
 
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -46,11 +55,11 @@ function TheatresTable({theatresList}) {
   <MaterialTable
   
   columns={[
-    {title:"id", field:"_id"},
-    {title:"name", field:"name"},
+    {title:"Id", field:"_id"},
+    {title:"Name", field:"name"},
     {title:"Description", field:"description"},
-    {title:"pincode", field:"pinCode"},
-    {title:"city", field:"city"}
+    {title:"Pincode", field:"pinCode"},
+    {title:"City", field:"city"}
   ]}
 
   data={theatresList}
@@ -63,6 +72,8 @@ function TheatresTable({theatresList}) {
   rowStyle: {
     cursor: "pointer",
   },
+  paginationType: isMobile ? "stepped" : "normal",
+          pageSizeOptions: [5, 10, 15],
 }}
   />
   )

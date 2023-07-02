@@ -19,7 +19,14 @@ import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 
 
+import { useTheme } from '@mui/styles';
+import { useMediaQuery } from '@mui/material';
+
+
 function BookingsTable({bookingsList}) {
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -46,7 +53,7 @@ function BookingsTable({bookingsList}) {
     <MaterialTable
   
     columns={[
-      {title:"id", field:"_id"},
+      {title:"Id", field:"_id"},
       {title:"User Name", field:"userId.name"},
       {title:"Movie Name", field:"movieId.name"},
       {title:"Theatre Name", field:"director"},
@@ -65,6 +72,10 @@ function BookingsTable({bookingsList}) {
     rowStyle: {
       cursor: "pointer",
     },
+
+    paginationType: isMobile ? "stepped" : "normal",
+          pageSizeOptions: [5, 10, 15],
+
   }}
     />
   )

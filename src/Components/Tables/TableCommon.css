@@ -1,0 +1,15 @@
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .pagination-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  @media (max-width: 600px) {
+    .pagination-wrapper {
+      justify-content: center;
+    }
+  }

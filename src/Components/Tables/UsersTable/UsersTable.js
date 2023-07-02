@@ -1,6 +1,8 @@
+import React, { forwardRef } from 'react';
+import MaterialTable from 'material-table';
 
-
-import React, { forwardRef } from 'react'
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -17,53 +19,57 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
-import MaterialTable from 'material-table';
 
-function UsersTable({usersList}) {
-    const tableIcons = {
-        Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
-        Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
-        Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-        Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-        DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-        Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
-        Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
-        Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
-        LastPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} /> ),
-        FirstPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-        PreviousPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-        NextPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
-        ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-        Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-        SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
-        ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-        ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
-      };
+function UsersTable({ usersList }) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const tableIcons = {
+    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+    DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+    LastPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+    FirstPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+    PreviousPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    NextPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
+    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+    SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+    ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
+  };
 
   return (
-    <MaterialTable
-  
-  columns={[
-    {title:"User Id", field:"userId"},
-    {title:"User Name", field:"name"},
-    {title:"Email", field:"email"},
-    {title:"User Type", field:"userTypes"},
-    {title:"Status", field:"userStatus"},
-  ]}
-
-  data={usersList}
-  title= "User List"
-  icons={tableIcons}
-  options={{
-    exportButton: true,
-  sorting: true,
-  filtering : true,
-  rowStyle: {
-    cursor: "pointer",
-  },
-}}
-  />
-  )
+    <div style={{ maxWidth: '100%' }}>
+      <MaterialTable
+        columns={[
+          { title: "User Id", field: "userId" },
+          { title: "User Name", field: "name" },
+          { title: "Email", field: "email" },
+          { title: "User Type", field: "userTypes" },
+          { title: "Status", field: "userStatus" },
+        ]}
+        data={usersList}
+        title="User List"
+        icons={tableIcons}
+        options={{
+          exportButton: true,
+          sorting: true,
+          filtering: true,
+          rowStyle: {
+            cursor: "pointer",
+          },
+          paginationType: isMobile ? "stepped" : "normal",
+          pageSizeOptions: [5, 10, 15],
+        }}
+      />
+    </div>
+  );
 }
 
-export default UsersTable
+export default UsersTable;

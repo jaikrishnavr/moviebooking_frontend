@@ -7,7 +7,7 @@ import { getAllUsers } from "../../Api/Users.api";
 import CardList from "../../Components/CardList/CardList";
 import { keys } from "../../Utils/Constants";
 import TheatresTable from "../../Components/Tables/TheatresTable/TheatresTable";
-import { ThemeProvider, createMuiTheme, createTheme } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import MoviesTable from "../../Components/Tables/MoviesTable/MoviesTable";
 import BookingsTable from "../../Components/Tables/BookingsTable/BookingsTable";
 import UsersTable from "../../Components/Tables/UsersTable/UsersTable";
@@ -137,7 +137,7 @@ function Admin() {
 
         <CardList counterInfo={counterInfo} />
 </WidgetContext.Provider>
-<ThemeProvider theme={theme}>
+<ThemeProvider theme={theme} >
         { showTheatresTable &&   <div style={{ maxWidth: "100%" }}> 
         <TheatresTable theatresList={theatresList}/> 
         </div> 

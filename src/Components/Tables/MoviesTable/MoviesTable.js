@@ -17,7 +17,14 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 
+import { useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/styles';
+
 function MoviesTable({ moviesList }) {
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -38,25 +45,18 @@ function MoviesTable({ moviesList }) {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
   };
 
-
-  const ImageCell = ({ rowData, dataKey, ...rest }) => (
-    <div {...rest}>
-      <img src={rowData[dataKey]} width="70" alt="Movie Poster" />
-    </div>
-  );
-
   return (
     <MaterialTable
 
       columns={[
 
-        { title: "id", field: "_id" },
+        { title: "Id", field: "_id" },
         {
           title: "Poster",
           field: "posterUrl", // Replace "image" with the actual field name for the image URL
           render: rowData => <img src={rowData.posterUrl} alt="Poster" style={{ width: 70 }} />,
         },
-        { title: "name", field: "name" },
+        { title: "Name", field: "name" },
         { title: "Director", field: "director" },
         { title: "Release Date", field: "releaseDate" },
         { title: "Release Status", field: "releaseStatus" }
@@ -72,6 +72,10 @@ function MoviesTable({ moviesList }) {
         rowStyle: {
           cursor: "pointer",
         },
+
+        paginationType: isMobile ? "stepped" : "normal",
+          pageSizeOptions: [5, 10, 15],
+
       }}
     />
   )
