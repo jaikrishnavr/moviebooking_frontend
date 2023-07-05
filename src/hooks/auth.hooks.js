@@ -52,7 +52,7 @@ export const useLogin = () => {
   
 
 export const useRegister = () => {
-  const initialStates = { name: "", email: "", userId: "", password: "", userTypes: "" };
+  const initialStates = { name: "", email: "", userId: "", password: "", userType: "" };
 
   const navigate = useNavigate();
 
@@ -87,7 +87,7 @@ export const useRegister = () => {
 
 const onRegister = async (values, props) => {
  // console.log(props);
-    const userDetails = {name:values.name, email:values.email, userId: values.userId, password: values.password, userTypes: values.userTypes };
+    const userDetails = {name:values.name, email:values.email, userId: values.userId, password: values.password, userType: values.userType };
     const registerResponse = await register(userDetails);
     console.log(registerResponse)
 

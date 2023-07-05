@@ -65,7 +65,7 @@ function SignupForm() {
                                 <ErrorMessage name="password" component="div" />
 
 
-                                <Field name="userTypes" as="select" className="form-control bg-white m-2" >
+                                <Field name="userType" as="select" className="form-control bg-white m-2" >
                                     <option value="CUSTOMER">Customer</option>
                                     <option value="CLIENT">Client</option>
                                 </Field>
