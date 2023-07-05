@@ -30,3 +30,21 @@ return response.data
 
 
 }
+
+
+export const register = async (user)=>{
+
+    try{
+     const response = await axios.post(`${BASE_URL}/mba/api/v1/auth/signup`, user);
+
+    console.log(response);
+
+     return response;
+    }
+    catch(err){
+        console.log(err);
+        return err;
+    }
+
+
+}
