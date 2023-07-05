@@ -66,8 +66,10 @@ function SignupForm() {
 
 
                                 <Field name="userType" as="select" className="form-control bg-white m-2" >
-                                    <option value="CUSTOMER">Customer</option>
+                                    <option>select userType</option>
                                     <option value="CLIENT">Client</option>
+                                    <option value="CUSTOMER">Customer</option>
+                                    
                                 </Field>
 
                                
