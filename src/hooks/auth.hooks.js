@@ -1,10 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TOKEN, USER_TYPES, userTypes } from "../Utils/Constants";
 import { useEffect } from "react";
 import { register, signIn } from "../Api/Auth.api";
 
 export const useLogin = () => {
     const initialStates = { userId: "", password: "" };
+
+    const location = useLocation();
+
+    const redirectUrl =  new URLSearchParams( location.search).get('redirectKey');
+    
 
 
     const navigate = useNavigate();
@@ -17,8 +22,12 @@ export const useLogin = () => {
         if(!userType || !token){
             return;
           }
+
+          if(redirectUrl){
+            navigate(redirectUrl)
+          }
       
-          if(userType === userTypes.ADMIN){
+          else if(userType === userTypes.ADMIN){
             navigate("/admin");
           }
           else if(userType === userTypes.CLIENT){
