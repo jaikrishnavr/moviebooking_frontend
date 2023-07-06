@@ -16,7 +16,7 @@ function Loginform() {
     backgroundSize: 'cover',
   }}>
 
-  <div className='p-5' style={{ border: "3px solid white", borderRadius: "50px", backgroundColor: "rgba(0,0,0,0.8)" }} >
+  <div className='p-5' style={{ border: "3px solid gray", borderRadius: "20px", backgroundColor: "rgba(0,0,0,0.9)" }} >
 
     <div className='row ' >
 

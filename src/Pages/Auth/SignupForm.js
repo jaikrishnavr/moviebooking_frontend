@@ -15,7 +15,7 @@ function SignupForm() {
             backgroundSize: 'cover',
         }}>
 
-        <div className='p-5 ' style={{ border: "3px solid white", borderRadius: "50px", backgroundColor: "rgba(0,0,0,0.8)" }} >
+        <div className='p-5 ' style={{  border: "3px solid gray", borderRadius: "20px", backgroundColor: "rgba(0,0,0,0.9)" }} >
 
             <div className='row ' >
 
@@ -66,7 +66,7 @@ function SignupForm() {
 
 
                                 <Field name="userType" as="select" className="form-control bg-white m-2" >
-                                    <option>select userType</option>
+                                    <option>Select Usertype</option>
                                     <option value="CLIENT">Client</option>
                                     <option value="CUSTOMER">Customer</option>
                                     
