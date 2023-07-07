@@ -1,5 +1,5 @@
 import MaterialTable from 'material-table'
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useEffect, useState } from 'react'
 
 
 import { useTheme } from '@material-ui/core/styles';
@@ -21,8 +21,7 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
-
-
+import { deleteTheatresById, getAllTheatres, updateTheatresById } from '../../../Api/Theatres.api';
 
 function TheatresTable({theatresList}) {
 
@@ -51,6 +50,88 @@ function TheatresTable({theatresList}) {
         ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
       };
 
+      const [tableData, setTableData] = useState(theatresList); // Initialize the table data with initial props value
+
+      useEffect(() => {
+        const fetchTheatresData = async () => {
+          try {
+            const response = await getAllTheatres(); // Call the function with parentheses to invoke it
+            if (response.ok) {
+              const data = await response.json();
+              setTableData(data); // Update the table data in state
+            } else {
+              throw new Error('Failed to fetch table data');
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        };
+    
+        fetchTheatresData(); // Fetch the initial table data
+    
+        // Subscribe to changes and update the table data in state
+        const updateTableData = (newData) => {
+          setTableData(newData);
+        };
+         // Add event listener for real-time updates
+        const eventListener = (event) => {
+          // Handle the event and update the table data accordingly
+          updateTableData(event.data);
+        };
+         // Add event listener for real-time updates
+          // Cleanup function to remove the event listener
+      return () => { 
+
+      };
+      },[]);
+
+
+      const handleRowUpdate = (newData, oldData) => {
+        return new Promise(async (resolve, reject) => {
+          try {
+            // Perform the necessary data update or API call here
+            const updatedData = { ...oldData, ...newData }; // Merge the old and new data
+    
+            await updateTheatresById(newData._id, updatedData); // Call the API function to update the theater
+    
+            // Update the table data in state
+            const updatedTableData = tableData.map(row => {
+              if (row._id === newData._id) {
+                return { ...row, ...newData };
+              }
+              return row;
+            });
+            setTableData(updatedTableData);
+    
+            resolve(); // Resolve the promise to indicate success
+          } catch (error) {
+            console.log(error);
+            reject();
+          }
+        });
+      };
+    
+      const handleRowDelete = oldData => {
+        return new Promise(async (resolve, reject) => {
+          try {
+            // Perform the necessary data deletion or API call here
+    
+            await deleteTheatresById(oldData._id); // Call the API function to delete the theater
+    
+            // Remove the deleted row from the table data in state
+            const updatedTableData = tableData.filter(row => row._id !== oldData._id);
+            setTableData(updatedTableData);
+    
+            resolve(); // Resolve the promise to indicate success
+          } catch (error) {
+            console.log(error);
+            reject();
+          }
+        });
+      };
+    
+
+
   return (
   <MaterialTable
   
@@ -62,7 +143,7 @@ function TheatresTable({theatresList}) {
     {title:"City", field:"city"}
   ]}
 
-  data={theatresList}
+  data={tableData}
   title= "Theaters List"
   icons={tableIcons}
   options={{
@@ -71,7 +152,7 @@ function TheatresTable({theatresList}) {
       color: '#FFF'
     },    
 
-    exportButton: true,
+    exportButton: false,
   sorting: false,
  
   rowStyle: {
@@ -81,8 +162,16 @@ function TheatresTable({theatresList}) {
   paginationType: isMobile ? "stepped" : "normal",
           pageSizeOptions: [5, 10, 15],
 }}
+editable={{
+
+  onRowUpdate: handleRowUpdate,
+  onRowDelete: handleRowDelete
+
+}}
+
+ 
   />
-  )
+  );
 }
 
 export default TheatresTable
