@@ -47,3 +47,16 @@ catch(err){
  console.log(err);
 }
 }
+
+export const CreateTheatres = async (theatreData) => { 
+
+    try{
+        const res= await axios.get(`${BASE_URL}/mba/api/v1/theatres`,theatreData,{headers:{
+            'x-access-token':localStorage.getItem(TOKEN)
+        }})
+        return res;
+       }
+       catch(err){
+        console.log(err);
+       }
+    }
