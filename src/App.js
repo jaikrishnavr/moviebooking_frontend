@@ -6,6 +6,7 @@ import LandingPage from './Pages/LandingPage/LandingPage';
 import MovieDetails from './Pages/MovieDetails/MovieDetails';
 import Admin from './Pages/Admin/Admin';
 import AuthHoc from './Hoc/AuthHoc';
+import { Client } from './Pages/Client/Client';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
 
   <Route exact path="/login" element={<Auth/>}/>
   <Route exact path="/signup" element={<Auth/>}/>
+  <Route exact path="/client" element={<Client/>}/>
   <Route exact path ="/movie/:movieId/details" element={<AuthHoc> <MovieDetails/> </AuthHoc>}/>
   <Route exact path="/admin" element={<Admin/>}/>
   <Route exact path="/" element={<LandingPage/>}/>
