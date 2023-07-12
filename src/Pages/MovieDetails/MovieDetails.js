@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../../Components/Navbar/Navbar'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { CSpinner } from '@coreui/react';
 import { getMovieById } from '../../Api/Movie.api';
 import ReactPlayer from 'react-player';
@@ -70,7 +70,11 @@ function MovieDetails() {
         }
 
         <div className='my-4'>
+            <Link to={`/buyTickets/${movieId}`}>
+
             <Button variant='warning'>Book Ticket</Button>
+
+            </Link>
         </div>
     
 </div>

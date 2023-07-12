@@ -60,3 +60,19 @@ export const CreateTheatres = async (theatreData) => {
         console.log(err);
        }
     }
+
+    export const getTheatresForAMovie = async (movieId)=>{
+
+        try{
+     const res= await axios.get(`${BASE_URL}/mba/api/v1/movies/${movieId}/theatres`,{headers:{
+         'x-access-token':localStorage.getItem(TOKEN)
+     }})
+ 
+     return res;
+ 
+    }
+    catch(err){
+     console.log(err);
+    }
+    } 
+        
