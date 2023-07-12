@@ -21,7 +21,7 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
-import { CreateTheatres, deleteTheatresById, getAllTheatres, updateTheatresById } from '../../../Api/Theatres.api';
+import {  CreateTheatres, deleteTheatresById, getAllTheatres, updateTheatresById } from '../../../Api/Theatres.api';
 
 
 function TheatresTable({ theatresList }) {
@@ -54,19 +54,24 @@ function TheatresTable({ theatresList }) {
   const [tableData, setTableData] = useState(theatresList); // Initialize the table data with initial props value
 
   useEffect(() => {
-    // Subscribe to changes and update the table data in state
-    const updateTableData = (newData) => {
-      setTableData(newData);
+    const fetchData = async () => {
+      try {
+        // Make the API request to fetch all theatres
+        const response = await getAllTheatres(); // Assuming getAllTheatres() is an async function that returns a promise
+        const newData = response.data; // Assuming the response data contains the updated table data
+  
+        // Update the table data in state
+        setTableData(newData);
+      } catch (error) {
+        // Handle the error
+        console.error('Error fetching theatres:', error);
+      }
     };
-    // Add event listener for real-time updates
-    const eventListener = (event) => {
-      // Handle the event and update the table data accordingly
-      updateTableData(event.data);
-    };
-    // Add event listener for real-time updates
-    // Cleanup function to remove the event listener
+    fetchData(); // Call the fetchData function when the component mounts
+  
+    // Cleanup function (if needed)
     return () => {
-
+      // Cleanup logic (if needed)
     };
   }, []);
 

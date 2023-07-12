@@ -54,26 +54,53 @@ function ClientTheatresTable({ theatresList }) {
   const [tableData, setTableData] = useState(theatresList); // Initialize the table data with initial props value
 
   useEffect(() => {
-    // Subscribe to changes and update the table data in state
-    const updateTableData = (newData) => {
-      setTableData(newData);
+    const fetchData = async () => {
+      try {
+        // Make the API request to fetch all theatres
+        const response = await getAllTheatres(); // Assuming getAllTheatres() is an async function that returns a promise
+        const newData = response.data; // Assuming the response data contains the updated table data
+  
+        // Update the table data in state
+        setTableData(newData);
+      } catch (error) {
+        // Handle the error
+        console.error('Error fetching theatres:', error);
+      }
     };
-    // Add event listener for real-time updates
-    const eventListener = (event) => {
-      // Handle the event and update the table data accordingly
-      updateTableData(event.data);
-    };
-    // Add event listener for real-time updates
-    // Cleanup function to remove the event listener
+    fetchData(); // Call the fetchData function when the component mounts
+  
+    // Cleanup function (if needed)
     return () => {
-
+      // Cleanup logic (if needed)
     };
   }, []);
 
-
   
 
+  const handleRowUpdate = (newData, oldData) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Perform the necessary data update or API call here
+        const updatedData = { ...oldData, ...newData }; // Merge the old and new data
 
+        await updateTheatresById(newData._id, updatedData); // Call the API function to update the theater
+
+        // Update the table data in state
+        const updateTableData = tableData.map(row => {
+          if (row._id === newData._id) {
+            return { ...row, ...newData };
+          }
+          return row;
+        });
+        setTableData(updateTableData);
+
+        resolve(); // Resolve the promise to indicate success
+      } catch (error) {
+        console.log(error);
+        reject();
+      }
+    });
+  };
 
 
 
@@ -108,6 +135,10 @@ function ClientTheatresTable({ theatresList }) {
         },
         paginationType: isMobile ? "stepped" : "normal",
         pageSizeOptions: [5, 10, 15],
+      }}
+
+      editable={{
+        onRowUpdate:handleRowUpdate
       }}
     
 

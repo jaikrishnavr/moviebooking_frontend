@@ -80,10 +80,12 @@ function Admin() {
 
   useEffect(() => {
     init();
+    
     // fetchTheatres();
     // fetchMovies();
     // fetchBooking();
     // fetchUsers();
+  
   }, []);
 
 
