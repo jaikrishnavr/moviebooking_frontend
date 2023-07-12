@@ -85,7 +85,17 @@ function Admin() {
     // fetchMovies();
     // fetchBooking();
     // fetchUsers();
+
+
+   /* const interval = setInterval(() => {
+      fetchTheatres();
+      fetchMovies();
+      fetchBookings();
+      fetchUsers();
+    }, 5000);
   
+    return () => clearInterval(interval);*/
+    
   }, []);
 
 
