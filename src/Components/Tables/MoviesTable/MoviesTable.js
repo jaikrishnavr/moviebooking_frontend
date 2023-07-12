@@ -219,111 +219,170 @@ function MoviesTable() {
         ]}
       />
 
-      <Modal show={showModal} onHide={handleModalClose}>
+     
+<Modal show={showModal} onHide={handleModalClose}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Movie</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h5 className="m-1">Id: {selectedMovie?._id}</h5>
 
-          <div className="input-group mt-3 mx-2">
-            <span className="input-group-text">Poster</span>
+          <div className="input-group mt-3 mx-2 ">
+            <span className="input-group-text "> Poster </span>
             <input
               type="text"
               name="posterUrl"
-              value={selectedMovie?.posterUrl || ""}
+              className="form-control"
+              value={selectedMovie?.posterUrl}
               onChange={(e) =>
                 setSelectedMovie({
                   ...selectedMovie,
-                  posterUrl: e.target.value
+                  posterUrl: e.target.value,
                 })
               }
-              key="posterUrl"
             />
           </div>
 
-          <div className="input-group mt-3 mx-2">
-            <span className="input-group-text">Trailer URL</span>
+          <div className="input-group mt-3 mx-2 ">
+            <span className="input-group-text "> Trailer url </span>
             <input
               type="text"
-              name="trailerUrl"
-              value={selectedMovie?.trailerUrl || ""}
+              name="Trailer url"
+              className="form-control"
+              value={selectedMovie?.trailerUrl}
               onChange={(e) =>
                 setSelectedMovie({
                   ...selectedMovie,
-                  trailerUrl: e.target.value
+                  trailerUrl: e.target.value,
                 })
               }
-              key="trailerUrl"
             />
           </div>
 
-          <div className="input-group mt-3 mx-2">
-            <span className="input-group-text">Name</span>
+          <div className="input-group mt-3 mx-2 ">
+            <span className="input-group-text ">Movie Name </span>
             <input
               type="text"
               name="name"
-              value={selectedMovie?.name || ""}
+              className="form-control"
+              value={selectedMovie?.name}
               onChange={(e) =>
                 setSelectedMovie({ ...selectedMovie, name: e.target.value })
               }
-              key="name"
             />
           </div>
 
-          <div className="input-group mt-3 mx-2">
-            <span className="input-group-text">Director</span>
+          <div className="input-group mt-3 mx-2 ">
+            <span className="input-group-text "> description </span>
+            <textarea
+            rows='5'
+              type="text"
+              className="form-control"
+              name="description"
+              value={selectedMovie?.description}
+              onChange={(e) =>
+                setSelectedMovie({ ...selectedMovie, description: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="input-group mt-3 mx-2 ">
+            <span className="input-group-text "> Director </span>
             <input
               type="text"
+              className="form-control"
               name="director"
-              value={selectedMovie?.director || ""}
+              value={selectedMovie?.director}
               onChange={(e) =>
                 setSelectedMovie({ ...selectedMovie, director: e.target.value })
               }
-              key="director"
+            />
+          </div>
+          <div className="input-group mt-3 mx-2 ">
+            <span className="input-group-text "> casts </span>
+            <input
+              type="text"
+              className="form-control"
+              name="casts"
+              value={selectedMovie?.casts}
+              onChange={(e) =>
+                setSelectedMovie({ ...selectedMovie, casts: e.target.value })
+              }
+            />
+          </div>
+          <div className="input-group mt-3 mx-2 ">
+            <span className="input-group-text "> language </span>
+            <input
+             className="form-control"
+              type="text"
+              name="language"
+              value={selectedMovie?.language}
+              onChange={(e) =>
+                setSelectedMovie({ ...selectedMovie, language: e.target.value })
+              }
             />
           </div>
 
           <div className="input-group mt-3 mx-2">
-            <span className="input-group-text">Release Date</span>
+            <span className="input-group-text"> Release Date </span>
             <input
               type="text"
+              className="form-control"
               name="releaseDate"
-              value={selectedMovie?.releaseDate || ""}
+              value={selectedMovie?.releaseDate}
               onChange={(e) =>
                 setSelectedMovie({
                   ...selectedMovie,
-                  releaseDate: e.target.value
+                  releaseDate: e.target.value,
                 })
               }
-              key="releaseDate"
             />
           </div>
 
-          <div className="input-group mt-3 mx-2">
-            <span className="input-group-text">Release Status</span>
+        
+
+          <div className="input-group mb-3 mt-3">
+  <span className="input-group-text">Release Status </span>
+  <select
+    name="priority"
+    className="form-select"
+    value={selectedMovie?.releaseStatus || ""}
+    onChange={(e) =>
+      setSelectedMovie({
+        ...selectedMovie,
+        releaseStatus: e.target.value,
+    })
+  }
+  >
+    <option value=""> select the status </option>
+    <option value="RELEASED"> RELEASED </option>
+    <option value="UNRELEASED"> UNRELEASED </option>
+    <option value="BLOCKED"> BLOCKED </option>
+  </select>
+</div>
+
+
+
+       {/*  <div className="input-group mt-3 mx-2 ">
+            <span className="input-group-text "> Release status </span>
             <input
               type="text"
               name="releaseStatus"
-              value={selectedMovie?.releaseStatus || ""}
+              value={selectedMovie?.releaseStatus}
               onChange={(e) =>
                 setSelectedMovie({
                   ...selectedMovie,
-                  releaseStatus: e.target.value
+                  releaseStatus: e.target.value,
                 })
               }
-              key="releaseStatus"
             />
-          </div>
+          </div>*/ } 
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>
             Close
           </Button>
-          <Button
-            variant="success"
-            onClick={() => handleModalSave(selectedMovie, selectedMovie)}
-          >
+          <Button variant="success" onClick={() => handleModalSave(selectedMovie, selectedMovie)}>
             Update Movie
           </Button>
         </Modal.Footer>
