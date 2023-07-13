@@ -8,6 +8,7 @@ import Admin from './Pages/Admin/Admin';
 import AuthHoc from './Hoc/AuthHoc';
 import { Client } from './Pages/Client/Client';
 import MovieTheatres from './Pages/MovieTheatres/MovieTheatres';
+import Booking from './Pages/Bookings/Booking';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
   <Route exact path="/client" element={<Client/>}/>
   <Route exact path ="/movie/:movieId/details" element={ <MovieDetails/>}/>
   <Route exact path ="/buyTickets/:movieId" element={<AuthHoc> <MovieTheatres/> </AuthHoc>}/>
+  <Route exact path ="/buyTickets/:movieId/:theatreId" element={<Booking/>}/>
   <Route exact path="/admin" element={<Admin/>}/>
   <Route exact path="/" element={<LandingPage/>}/>
 
