@@ -15,11 +15,11 @@ const Payments = ({show , setShow, theatresDetail, movieDetails, selectedSeats})
     
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Confirm payment</Modal.Title>
+          <Modal.Title>Order Summary</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className='row'>
-            <div className='col'>
+          <div className='row '>
+            <div className='col my-2'>
               
               <h3>{movieDetails.name}</h3>
               <small>{movieDetails.language}</small>
@@ -28,9 +28,21 @@ const Payments = ({show , setShow, theatresDetail, movieDetails, selectedSeats})
               <br/>
               <small className='text-success'> m- ticket</small>
             </div>
-            <div className='col-5'>
-              <h5><span>No of Tickets : </span>{selectedSeats.length}</h5> 
+            <div className='col-5 my-2'>
+              <h5><span>Tickets : </span>{selectedSeats.length}</h5> 
+              <br/>
             </div>
+            
+            <hr/>
+
+            <div className='row'>
+              <div className='col'>
+                <p> Total</p>
+                </div>
+                <div className='col-4'>
+                <p className='fw-bolder'>Rs. {movieDetails.price*selectedSeats.length}</p>
+              </div>
+                </div>
 
           </div>
         </Modal.Body>
@@ -39,7 +51,7 @@ const Payments = ({show , setShow, theatresDetail, movieDetails, selectedSeats})
             Close
           </Button>
           <Button variant="primary" onClick={handleClose}>
-            Save Changes
+            Confirm Payment
           </Button>
         </Modal.Footer>
       </Modal>
