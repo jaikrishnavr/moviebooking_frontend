@@ -8,9 +8,9 @@ const seats = Array.from({ length: 8 * 8 }, (_, i) => i)
 
 
 
-function Cinema({ movieDetails }) {
+function Cinema({ movieDetails , selectedSeats, setSelectedSeat}) {
 
-    const [selectedSeats, setSelectedSeat] = useState([])
+  
 
     function handleSelectedState(seat) {
         
@@ -56,6 +56,8 @@ function Cinema({ movieDetails }) {
             )
           })}
         </div>
+        
+     
       </div>
     ) 
   }
