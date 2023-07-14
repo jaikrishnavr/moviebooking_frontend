@@ -149,3 +149,38 @@
 .info .total {
   color: #fffefc;
 }
+
+@media only screen and (min-width: 322px) and (max-width: 378px) {
+  .Movies select {
+    font-size: 12px;
+    margin-left: 8px;
+    padding: 4px 16px;
+  }
+
+  .ShowCase li {
+    margin: 0 8px;
+  }
+
+  .Cinema .screen {
+    height: 50px;
+  }
+
+  .Cinema .seats {
+    grid-gap: 4px;
+  }
+
+  .Cinema .seats .seat:nth-of-type(8n + 2),
+  .Cinema .seats .seat:nth-of-type(8n + 6) {
+    margin-right: 6px;
+  }
+
+  .seat {
+    width: 12px;
+    height: 10px;
+    top: 0;
+  }
+
+  .info .count {
+    font-size: 12px;
+  }
+}

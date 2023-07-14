@@ -1,18 +1,13 @@
 import React from 'react'
 import { Button, Modal } from 'react-bootstrap';
 
-const Payments = ({show , setShow, theatresDetail, movieDetails, selectedSeats}) => {
+const Payments = ({show , setShow, theatresDetail, movieDetails, selectedSeats, confirmBooking , bookingDetails}) => {
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true);
 
   return (
     <>
-
-<Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-    
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Order Summary</Modal.Title>
@@ -45,14 +40,49 @@ const Payments = ({show , setShow, theatresDetail, movieDetails, selectedSeats})
                 </div>
 
           </div>
+
+          {
+
+            bookingDetails&&
+
+<div> 
+  {
+    bookingDetails.status === "SUCCESS" ? (
+      <div className='d-flex flex-column justify-content-between align-items-center'>
+
+        <img src={movieDetails.posterUrl} height={100} width={100} /> 
+        <h5>Booking CONFIRMED !</h5>
+        <small>booking Id :</small>
+        <p>  {bookingDetails._id}</p>
+      </div>
+    ): 
+    <div className='d-flex flex-column justify-content-between align-items-center'>
+
+    <img src={movieDetails.posterUrl} height={100} width={100} /> 
+    <h5>Booking FAILED !</h5>
+    <small>Please Retry</small>
+
+  </div>
+  }
+
+
+</div>
+
+          }
+
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+      { !bookingDetails &&
+          <Button variant="primary" onClick={confirmBooking}>
             Confirm Payment
           </Button>
+
+      }
+
         </Modal.Footer>
       </Modal>
     </>

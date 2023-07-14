@@ -8,6 +8,7 @@ import './Booking.css'
 import Cinema from '../../Components/Cinema/Cinema';
 import { Button } from 'react-bootstrap';
 import Payments from '../../Components/Payments/Payments';
+import { createBooking } from '../../Api/Booking.api';
 
 
 
@@ -27,6 +28,7 @@ const Booking = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [selectedSeats, setSelectedSeat] = useState([]);
     const [showPaymentModel, setShowPaymentModel] = useState(false);
+    const [bookingDetails, setBookingDetails] = useState(null )
 
 
     const getTheatresDetails = async () => {
@@ -57,11 +59,41 @@ setShowPaymentModel(true);
 }
 
 
+const confirmBooking = async () => {
+    const timingSelect = document.getElementById('Timing');
+    const timing = timingSelect.options[timingSelect.selectedIndex].value;
+    const data ={
+        theatreId:theatreId,
+        movieId:movieId,
+        userId:localStorage.getItem('id'), 
+        noOfSeats:selectedSeats.length,
+        totalCost:selectedSeats.length*movieDetails.price,
+        timing: timing
+    };
+
+    const booking = await createBooking(data)
+
+//const payment = await makePayment();
+
+const paymentSuccess=true;
+
+if(paymentSuccess){
+  booking.data.status = "SUCCESS";
+}else{
+  booking.data.status = "FAILED";
+}
+
+setBookingDetails(booking.data);
+
+}
+
+
+
     return <div>
 
         <Navbar />
 
-        <div className='bg-black text-center fullView'>
+        <div className='bg-black text-center fullView' >
             {
                 isLoading && <CSpinner color="danger" variant="grow" />
             }
@@ -73,6 +105,17 @@ setShowPaymentModel(true);
 
                     <ShowCase />
                     <Cinema movieDetails={movieDetails} selectedSeats={selectedSeats} setSelectedSeat={setSelectedSeat} />
+
+                
+
+                    <select id='Timing' className='form-select text-center fw-bold mb-3' >
+                        <option disabled selected hidden> select the timing</option>
+                        <option value={"MORNING - 7:30 AM"}> MORNING - 7:30 AM</option>
+                        <option value={"MORNING - 11:30 AM"}> MORNING -11:30 AM</option>
+                        <option value={"AFTERNOON - 1:30 PM"}> AFTERNOON - 1:30 PM</option>
+                        <option value={"EVENING - 4:30 PM"}> EVENING - 4:30 PM</option>
+                        <option value={"NIGHT - 6:30 PM"}> NIGHT - 6:30 PM</option>
+                    </select>
 
                     <p className="info">
                         You have selected <span className="count">{selectedSeats.length}</span>{' '}
@@ -96,7 +139,7 @@ setShowPaymentModel(true);
 {
     !isLoading&& 
 
-        <Payments show={showPaymentModel} setShow={setShowPaymentModel} theatresDetail={theatersDetail} movieDetails={movieDetails} selectedSeats={selectedSeats}/>
+        <Payments show={showPaymentModel} setShow={setShowPaymentModel} theatresDetail={theatersDetail} movieDetails={movieDetails} selectedSeats={selectedSeats} confirmBooking={confirmBooking} bookingDetails={bookingDetails} />
     
 }
 

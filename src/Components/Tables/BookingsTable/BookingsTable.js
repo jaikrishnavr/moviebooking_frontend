@@ -56,7 +56,7 @@ function BookingsTable({bookingsList}) {
       {title:"Id", field:"_id"},
       {title:"User Name", field:"userId.name"},
       {title:"Movie Name", field:"movieId.name"},
-      {title:"Theatre Name", field:"director"},
+      {title:"Theatre Name", field:"theatreId.name"},
       {title:"Status", field:"status"},
       {title:"Seats" , field:"noOfSeats"},
       {title:"Amount" , field:"totalCost"}
