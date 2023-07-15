@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import GooglePayButton from "@google-pay/button-react";
 
@@ -12,6 +12,7 @@ const Payments = ({ show, setShow, theatresDetail, movieDetails, selectedSeats, 
   const [paymentStatus, setPaymentStatus] = useState(null);
   const [buttonHeight, setButtonHeight] = useState(40);
   const [showModal, setShowModal] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const paymentRequest = {
     apiVersion: 2,
@@ -52,6 +53,21 @@ const Payments = ({ show, setShow, theatresDetail, movieDetails, selectedSeats, 
   };
 
   const disableButton = selectedSeats.length <= 0;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const isSmallScreen = windowWidth <= 344;
+  const shouldRenderPaymentButton = !bookingDetails && !disableButton && !isSmallScreen;
 
   return (
     <>
@@ -106,11 +122,11 @@ const Payments = ({ show, setShow, theatresDetail, movieDetails, selectedSeats, 
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          {!bookingDetails && !disableButton && (
+          {shouldRenderPaymentButton && (
             <GooglePayButton
               environment="TEST" // Set your desired environment (TEST or PRODUCTION)
               buttonColor={buttonColor}
-              buttonType='book'
+              buttonType="book"
               buttonSizeMode={buttonSizeMode}
               paymentRequest={paymentRequest}
               onLoadPaymentData={handlePaymentData}
