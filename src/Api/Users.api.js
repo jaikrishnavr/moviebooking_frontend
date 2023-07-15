@@ -15,3 +15,16 @@ export const getAllUsers = async () => {
         console.log(err);
        }
     }
+
+    export const updateUsers = async (userId , updatedData) => { 
+
+        try{
+            const res= await axios.put(`${BASE_URL}/mba/api/v1/users/${userId}`,updatedData,{headers:{
+                'x-access-token':localStorage.getItem(TOKEN)
+            }})
+            return res;
+           }
+           catch(err){
+            console.log(err);
+           }
+        }

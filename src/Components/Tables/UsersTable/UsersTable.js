@@ -1,76 +1,113 @@
-import React, { forwardRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import MaterialTable from 'material-table';
-
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import {
+  AddBox,
+  Check,
+  Clear,
+  DeleteOutline,
+  ChevronRight,
+  Edit,
+  FilterList,
+  FirstPage,
+  LastPage,
+  ChevronLeft,
+  Remove,
+  SaveAlt,
+  Search,
+  ViewColumn
+} from "@material-ui/icons";
+import { getAllUsers, updateUsers } from '../../../Api/Users.api';
 
-import AddBox from "@material-ui/icons/AddBox";
-import ArrowDownward from "@material-ui/icons/ArrowDownward";
-import Check from "@material-ui/icons/Check";
-import ChevronLeft from "@material-ui/icons/ChevronLeft";
-import ChevronRight from "@material-ui/icons/ChevronRight";
-import Clear from "@material-ui/icons/Clear";
-import DeleteOutline from "@material-ui/icons/DeleteOutline";
-import Edit from "@material-ui/icons/Edit";
-import FilterList from "@material-ui/icons/FilterList";
-import FirstPage from "@material-ui/icons/FirstPage";
-import LastPage from "@material-ui/icons/LastPage";
-import Remove from "@material-ui/icons/Remove";
-import SaveAlt from "@material-ui/icons/SaveAlt";
-import Search from "@material-ui/icons/Search";
-import ViewColumn from "@material-ui/icons/ViewColumn";
-
-function UsersTable({ usersList }) {
+function UsersTable() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const tableIcons = {
-    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
-    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
-    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-    DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
-    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
-    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
-    LastPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-    FirstPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-    PreviousPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    NextPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
-    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-    SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
-    ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
+    Add: AddBox,
+    Check: Check,
+    Clear: Clear,
+    Delete: DeleteOutline,
+    DetailPanel: ChevronRight,
+    Edit: Edit,
+    Export: SaveAlt,
+    Filter: FilterList,
+    FirstPage: FirstPage,
+    LastPage: LastPage,
+    NextPage: ChevronRight,
+    PreviousPage: ChevronLeft,
+    ResetSearch: Clear,
+    Search: Search,
+    SortArrow: Remove,
+    ThirdStateCheck: Remove,
+    ViewColumn: ViewColumn
+  };
+
+  const [tableData, setTableData] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await getAllUsers();
+      const newData = response.data;
+      setTableData(newData);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
+
+  const handleRowUpdate = async (newData, oldData) => {
+    try {
+      const updatedData = { ...oldData, ...newData };
+      await updateUsers(oldData.userId, updatedData);
+      const updatedTableData = tableData.map(row => {
+        if (row.userId === oldData.userId) {
+          return { ...row, ...newData };
+        }
+        return row;
+      });
+      setTableData(updatedTableData);
+      setSelectedUser({ ...oldData, ...newData }); // Update the selected user data
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
   };
 
   return (
     <div style={{ maxWidth: '100%' }}>
       <MaterialTable
         columns={[
-          { title: "User Id", field: "userId" },
-          { title: "User Name", field: "name" },
-          { title: "Email", field: "email" },
-          { title: "UserType", field: "userType" },
-          { title: "Status", field: "userStatus" },
+          { title: "User Id", field: "userId", editable: 'never' },
+          { title: "User Name", field: "name", editable: 'never' },
+          { title: "Email", field: "email", editable: 'never' },
+          { title: "User Type", field: "userTypes", editable: 'never' },
+          { title: "Status", field: "userStatus" }
         ]}
-        data={usersList}
+        data={tableData}
         title="User List"
         icons={tableIcons}
         options={{
           headerStyle: {
             backgroundColor: 'black',
             color: '#FFF'
-          }, 
+          },
           exportButton: true,
           sorting: false,
           filtering: true,
           rowStyle: {
             cursor: "pointer",
-            backgroundColor: '#EEE',
+            backgroundColor: '#EEE'
           },
           paginationType: isMobile ? "stepped" : "normal",
-          pageSizeOptions: [5, 10, 15],
+          pageSizeOptions: [5, 10, 15]
+        }}
+        editable={{
+          onRowUpdate: (newData, oldData) => handleRowUpdate(newData, oldData)
         }}
       />
     </div>
