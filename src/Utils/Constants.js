@@ -14,3 +14,7 @@ export const keys = {
     BOOKING:"BOOKING",
     USER:"USER"
 }
+
+export default{
+    userTypes
+}
