@@ -9,6 +9,7 @@ import AuthHoc from './Hoc/AuthHoc';
 import { Client } from './Pages/Client/Client';
 import MovieTheatres from './Pages/MovieTheatres/MovieTheatres';
 import Booking from './Pages/Bookings/Booking';
+import Foorter from './Pages/Footer/Foorter';
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
 </Routes>
 
 </Router>
+
+<Foorter/>
 
     </div>
   );
