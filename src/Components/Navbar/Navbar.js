@@ -6,13 +6,23 @@ import { useNavigate } from "react-router-dom";
 import '../../Components/Tables/TableCommon.css'
 
 
-const Navbar = () => {
+const Navbar = ({filterMovies}) => {
 
 
 
 const isLoggedIn = isUserLoggedIn();
 
 const navigate = useNavigate();
+const [searchValue, onSearchChange] = useState("");
+
+const onInputChange=(e)=>{
+    onSearchChange(e.target.value);
+
+    if(filterMovies){
+        filterMovies(e.target.value);
+    }
+}
+
 
 const onAuthButtonClick = () => {
 
@@ -37,7 +47,7 @@ const onAuthButtonClick = () => {
                 </div>
 
                 <div className="d-none d-md-block">
-                    <Form.Control size="lg" type="text" placeholder="Search Movie" />
+                <Form.Control size='lg' type="text" placeholder="Search Movie" input={searchValue} onChange={onInputChange} />
                 </div>
                 <div className="d-none d-md-block">
                     <Button className="btn btn-danger"  style={{backgroundColor:"#ED2B2A"}} onClick={onAuthButtonClick}>{(isLoggedIn)?"Logout": "Login"}</Button>
